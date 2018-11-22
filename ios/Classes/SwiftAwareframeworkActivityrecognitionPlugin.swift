@@ -1,0 +1,51 @@
+import Flutter
+import UIKit
+import SwiftyJSON
+import com_awareframework_ios_sensor_activityrecognition
+import com_awareframework_ios_sensor_core
+import awareframework_core
+
+public class SwiftAwareframeworkActivityrecognitionPlugin: AwareFlutterPluginCore, FlutterPlugin, AwareFlutterPluginSensorInitializationHandler, ActivityRecognitionObserver{
+
+    public func initializeSensor(_ call: FlutterMethodCall, result: @escaping FlutterResult) -> AwareSensor? {
+        if self.sensor == nil {
+            if let config = call.arguments as? Dictionary<String,Any>{
+                let json = JSON.init(config)
+                self.activityRecognitionSensor = ActivityRecognitionSensor.init(ActivityRecognitionSensor.Config(json))
+            }else{
+                self.activityRecognitionSensor = ActivityRecognitionSensor.init(ActivityRecognitionSensor.Config())
+            }
+            self.activityRecognitionSensor?.CONFIG.sensorObserver = self
+            return self.activityRecognitionSensor
+        }else{
+            return nil
+        }
+    }
+
+    var activityRecognitionSensor:ActivityRecognitionSensor?
+
+    public override init() {
+        super.init()
+        super.initializationCallEventHandler = self
+    }
+
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        // add own channel
+        super.setChannels(with: registrar,
+                          instance: SwiftAwareframeworkActivityrecognitionPlugin(),
+                          methodChannelName: "awareframework_activityrecognition/method",
+                          eventChannelName: "awareframework_activityrecognition/event")
+
+    }
+
+
+    public func onActivityChanged(data: Array<ActivityRecognitionData>) {
+        for handler in self.streamHandlers {
+            if handler.eventName == "on_data_changed" {
+                for activity in data {
+                    handler.eventSink(activity.toDictionary())
+                }
+            }
+        }
+    }
+}
