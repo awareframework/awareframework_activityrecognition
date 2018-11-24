@@ -26,18 +26,29 @@ class _MyAppState extends State<MyApp> {
 
     sensor = new ActivityRecognitionSensor(config);
 
+    sensor.start();
+
+  }
+
+  void _updateSensor(){
+    sensor.stop();
+    sensor.start();
   }
 
   @override
   Widget build(BuildContext context) {
-
 
     return new MaterialApp(
       home: new Scaffold(
           appBar: new AppBar(
             title: const Text('Plugin Example App'),
           ),
-          body: new ActivityRecognitionCard(sensor: sensor,)
+          body: new ActivityRecognitionCard(sensor: sensor,),
+          floatingActionButton: new FloatingActionButton(
+            onPressed: _updateSensor,
+            tooltip: 'Refresh',
+            child: new Icon(Icons.sync),
+          ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }

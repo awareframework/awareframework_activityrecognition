@@ -13,32 +13,39 @@ class ActivityRecognitionSensor extends AwareSensorCore {
   ActivityRecognitionSensor(ActivityrecognitionSensorConfig config):this.convenience(config);
   ActivityRecognitionSensor.convenience(config) : super(config){
     /// Set sensor method & event channels
-    super.setSensorChannels(_activityRecognitionMethod, _activityRecognitionStream);
+    super.setMethodChannel(_activityRecognitionMethod);
   }
 
   /// A sensor observer instance
-  Stream<Map<String,dynamic>> get onDataChanged {
-     return super.receiveBroadcastStream("on_data_changed").map((dynamic event) => Map<String,dynamic>.from(event));
+  Stream<Map<String,dynamic>> onDataChanged(String id) {
+     return super.getBroadcastStream(_activityRecognitionStream, "on_data_changed", id).map((dynamic event) => Map<String,dynamic>.from(event));
   }
 }
 
 class ActivityrecognitionSensorConfig extends AwareSensorConfig{
   ActivityrecognitionSensorConfig();
 
-  /// TODO
+  // sensing interval (min)
+  double interval = 10.0;
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
+    map['interval'] = interval;
     return map;
   }
 }
 
 /// Make an AwareWidget
 class ActivityRecognitionCard extends StatefulWidget {
-  ActivityRecognitionCard({Key key, @required this.sensor}) : super(key: key);
+  ActivityRecognitionCard({Key key,
+                          @required this.sensor,
+                                    this.cardId="activity_recognition_card",
+
+                          }) : super(key: key);
 
   ActivityRecognitionSensor sensor;
+  String cardId;
 
   @override
   ActivityRecognitionCardState createState() => new ActivityRecognitionCardState();
@@ -54,7 +61,7 @@ class ActivityRecognitionCardState extends State<ActivityRecognitionCard> {
 
     super.initState();
     // set observer
-    widget.sensor.onDataChanged.listen((event) {
+    widget.sensor.onDataChanged(widget.cardId).listen((event) {
       setState((){
         if(event!=null){
           DateTime.fromMicrosecondsSinceEpoch(event['timestamp']);
@@ -79,6 +86,12 @@ class ActivityRecognitionCardState extends State<ActivityRecognitionCard> {
       title: "Activity Recognition",
       sensor: widget.sensor
     );
+  }
+
+  @override
+  void dispose() {
+    widget.sensor.cancelBroadcastStream(widget.cardId);
+    super.dispose();
   }
 
 }

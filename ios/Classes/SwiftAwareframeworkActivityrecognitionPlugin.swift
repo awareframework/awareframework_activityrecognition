@@ -30,12 +30,9 @@ public class SwiftAwareframeworkActivityrecognitionPlugin: AwareFlutterPluginCor
     }
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        // add own channel
-        super.setChannels(with: registrar,
-                          instance: SwiftAwareframeworkActivityrecognitionPlugin(),
-                          methodChannelName: "awareframework_activityrecognition/method",
-                          eventChannelName: "awareframework_activityrecognition/event")
-
+        let instance = SwiftAwareframeworkActivityrecognitionPlugin()
+        super.setMethodChannel(with: registrar, instance: instance, channelName: "awareframework_activityrecognition/method")
+        super.setEventChannels(with: registrar, instance: instance, channelNames: ["awareframework_activityrecognition/event"])
     }
 
 
