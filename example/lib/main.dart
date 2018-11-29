@@ -15,13 +15,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   ActivityRecognitionSensor sensor;
-  ActivityrecognitionSensorConfig config;
+  ActivityRecognitionSensorConfig config;
 
   @override
   void initState() {
     super.initState();
 
-    config = ActivityrecognitionSensorConfig()
+    config = ActivityRecognitionSensorConfig()
       ..debug = true;
 
     sensor = new ActivityRecognitionSensor(config);

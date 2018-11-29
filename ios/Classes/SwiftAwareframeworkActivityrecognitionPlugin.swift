@@ -1,6 +1,5 @@
 import Flutter
 import UIKit
-import SwiftyJSON
 import com_awareframework_ios_sensor_activityrecognition
 import com_awareframework_ios_sensor_core
 import awareframework_core
@@ -10,8 +9,7 @@ public class SwiftAwareframeworkActivityrecognitionPlugin: AwareFlutterPluginCor
     public func initializeSensor(_ call: FlutterMethodCall, result: @escaping FlutterResult) -> AwareSensor? {
         if self.sensor == nil {
             if let config = call.arguments as? Dictionary<String,Any>{
-                let json = JSON.init(config)
-                self.activityRecognitionSensor = ActivityRecognitionSensor.init(ActivityRecognitionSensor.Config(json))
+                self.activityRecognitionSensor = ActivityRecognitionSensor.init(ActivityRecognitionSensor.Config(config))
             }else{
                 self.activityRecognitionSensor = ActivityRecognitionSensor.init(ActivityRecognitionSensor.Config())
             }
