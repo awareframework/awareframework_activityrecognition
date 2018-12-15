@@ -22,17 +22,15 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     config = ActivityRecognitionSensorConfig()
-      ..debug = true;
-
-    sensor = new ActivityRecognitionSensor(config);
-
+      ..debug = true
+      ..dbType = DatabaseType.DEFAULT
+      ..dbHost = "node.awareframework.com:1001";
+    sensor = new ActivityRecognitionSensor.init(config);
     sensor.start();
-
   }
 
   void _updateSensor(){
-    sensor.stop();
-    sensor.start();
+    sensor.sync(force: true);
   }
 
   @override

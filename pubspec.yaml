@@ -1,6 +1,6 @@
 name: awareframework_activityrecognition
-description: A new flutter plugin project.
-version: 0.0.3
+description: An Aware Framework Plugin for Monitoring Motion Activities
+version: 0.0.4
 author: AWARE Mobile Context Instrumentation Middleware Framework <yuuki.nishiyama@oulu.fi>
 homepage: http://www.awareframework.com
 
@@ -10,10 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  awareframework_core: ^0.0.9
+  awareframework_core: ^0.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test:
 
 # The following section is specific to Flutter.
 flutter:

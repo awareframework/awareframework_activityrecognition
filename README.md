@@ -1,6 +1,8 @@
-# Aware Activityrecognition
+# Aware ActivityRecognition
 
-TODO
+[![Build Status](https://travis-ci.org/awareframework/awareframework_activityrecognition.svg?branch=master)](https://travis-ci.org/awareframework/awareframework_activityrecognition)
+
+This is an Aware Framework plugin for monitoring motion activities. This package allows us to monitor motion activity data such as running, walking, and automotive.
 
 ## Install the plugin into project
 1. Edit `pubspec.yaml`
@@ -16,13 +18,14 @@ import 'package:awareframework_core/awareframework_core.dart';
 ```
 
 ## Public functions
-### activityrecognition Sensor
+### ActivityRecognition Sensor
 - `start()`
 - `stop()` 
-- `sync(force: Boolean)`
+- `sync(bool force)`
 - `enable()`
 - `disable()`
 - `isEnable()`
+- `setLabel(String label)`
 
 ### Configuration Keys
 TODO
@@ -45,14 +48,14 @@ The data representations is different between Android and iOS. Following links p
 ## Example usage
 ```dart
 // init config
-var config = ActivityrecognitionSensorConfig()
+var config = ActivityRecognitionSensorConfig()
   ..debug = true
   ..label = "label";
 
 // init sensor
-var sensor = new ActivityrecognitionSensor(config);
+var sensor = new ActivityRecognitionSensor(config);
 
-void mathod(){
+void method(){
     /// start 
     sensor.start();
     
@@ -70,7 +73,7 @@ void mathod(){
     sensor.sync(true);  
     
     // make a sensor care by the following code
-    var card = new ActivityrecognitionCard(sensor:sensor);
+    var card = new ActivityRecognitionCard(sensor:sensor);
     // NEXT: Add the card instance into a target Widget.
 }
 
