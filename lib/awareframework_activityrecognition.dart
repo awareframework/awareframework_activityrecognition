@@ -57,12 +57,37 @@ class ActivityRecognitionSensor extends AwareSensor {
   static StreamController<Map<String,dynamic>> streamController = StreamController<Map<String,dynamic>>();
   Map<String,dynamic> data = Map<String,dynamic>();
 
+  /// Init  ActivityRecognition Sensor without a configuration file
+  ///
+  /// ```dart
+  /// var sensor = ActivityRecognitionSensor();
+  /// ```
   ActivityRecognitionSensor():this.init(null);
+
+  /// Init  ActivityRecognition Sensor with  ActivityRecognitionSensorConfig
+  ///
+  /// ```dart
+  /// var config =   ActivityRecognitionSensorConfig();
+  /// config
+  ///   ..debug = true
+  ///   ..frequency = 100;
+  ///
+  /// var sensor =  ActivityRecognitionSensor.init(config);
+  /// ```
   ActivityRecognitionSensor.init(ActivityRecognitionSensorConfig config) : super(config){
     super.setMethodChannel(_activityRecognitionMethod);
   }
 
-  /// A sensor observer instance
+  /// An event channel for monitoring sensor events.
+  ///
+  /// `Stream<Map<String,dynamic>>` allow us to monitor the sensor update
+  /// events as follows:
+  ///
+  /// ```dart
+  /// sensor.onDataChanged.listen((data) {
+  ///   print(data)
+  /// }
+  ///
   Stream<Map<String,dynamic>> get onDataChanged {
     streamController.close();
     streamController = StreamController<Map<String,dynamic>>();
@@ -89,7 +114,6 @@ class ActivityRecognitionSensor extends AwareSensor {
   }
 
 }
-
 
 /// A configuration class of ActivityRecognitionSensor
 ///
@@ -132,7 +156,9 @@ class ActivityRecognitionCard extends StatefulWidget {
   ActivityRecognitionCardState createState() => new ActivityRecognitionCardState();
 }
 
-
+///
+/// A Card State of Accelerometer Sensor
+///
 class ActivityRecognitionCardState extends State<ActivityRecognitionCard> {
 
   String activity = "";

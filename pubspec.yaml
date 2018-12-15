@@ -1,6 +1,6 @@
 name: awareframework_activityrecognition
 description: An Aware Framework Plugin for Monitoring Motion Activities
-version: 0.0.4
+version: 0.0.5
 author: AWARE Mobile Context Instrumentation Middleware Framework <yuuki.nishiyama@oulu.fi>
 homepage: http://www.awareframework.com
 

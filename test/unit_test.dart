@@ -12,5 +12,6 @@ void main(){
 
     var mapConfig = config.toMap();
     expect(mapConfig["interval"], 15.0);
+
   });
 }
