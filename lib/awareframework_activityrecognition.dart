@@ -51,7 +51,7 @@ import 'package:flutter/material.dart';
 ///
 class ActivityRecognitionSensor extends AwareSensor {
   static const MethodChannel _activityRecognitionMethod = const MethodChannel('awareframework_activityrecognition/method');
-  static const EventChannel  _activityRecognitionStream  = const EventChannel('awareframework_activityrecognition/event');
+//  static const EventChannel  _activityRecognitionStream  = const EventChannel('awareframework_activityrecognition/event');
   static const EventChannel  _onDataChangedStream  = const EventChannel('awareframework_activityrecognition/event_on_data_changed');
 
   static StreamController<Map<String,dynamic>> streamController = StreamController<Map<String,dynamic>>();
