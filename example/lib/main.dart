@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:awareframework_activityrecognition/awareframework_activityrecognition.dart';
 import 'package:awareframework_core/awareframework_core.dart';
 
@@ -10,40 +13,26 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  ActivityRecognitionSensor sensor;
-  ActivityRecognitionSensorConfig config;
+  late ActivityRecognitionSensor sensor;
+  late ActivityRecognitionSensorConfig config;
 
   @override
   void initState() {
     super.initState();
 
-    config = ActivityRecognitionSensorConfig()
-      ..debug = true
-      ..dbType = DatabaseType.DEFAULT
-      ..dbHost = "node.awareframework.com:1001";
-    sensor = new ActivityRecognitionSensor.init(config);
-    sensor.start();
-  }
+    config = ActivityRecognitionSensorConfig()..debug = true;
 
-  void _updateSensor(){
-    sensor.sync(force: true);
+    sensor = new ActivityRecognitionSensor(config);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return new MaterialApp(
       home: new Scaffold(
-          appBar: new AppBar(
-            title: const Text('Plugin Example App'),
-          ),
-          body: new ActivityRecognitionCard(sensor: sensor,),
-          floatingActionButton: new FloatingActionButton(
-            onPressed: _updateSensor,
-            tooltip: 'Refresh',
-            child: new Icon(Icons.sync),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
+        appBar: new AppBar(
+          title: const Text('Plugin Example App'),
+        ),
+        body: Text(""),
       ),
     );
   }
