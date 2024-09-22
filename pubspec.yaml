@@ -1,16 +1,16 @@
 name: awareframework_activityrecognition
-description: A new flutter plugin project.
-version: 0.1.0
+description: An activity recognition library for Flutter.
+version: 0.7.0
 homepage: http://www.awareframework.com
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.20.0"
+  sdk: ">=2.12.0 <4.0.0"
+  flutter: ">=1.10.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  awareframework_core: ^0.6.0
+  awareframework_core: ^0.7.0
 
 dev_dependencies:
   flutter_test:

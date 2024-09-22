@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:awareframework_activityrecognition/awareframework_activityrecognition.dart';
-import 'package:awareframework_core/awareframework_core.dart';
 
 void main() => runApp(new MyApp());
 

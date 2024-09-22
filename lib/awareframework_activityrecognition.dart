@@ -60,15 +60,9 @@ class ActivityRecognitionSensor extends AwareSensorCore {
 
 class ActivityRecognitionSensorConfig extends AwareSensorConfig {
   ActivityRecognitionSensorConfig();
-
-  /// TODO
-
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-
-    // TODO
-
     return map;
   }
 }
